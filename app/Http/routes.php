@@ -30,8 +30,9 @@ Route::get('/register/application',['as' => 'register.application.index','uses' 
 Route::get('/register/application/{id}',['as' => 'register.application','uses' => 'RegisterController@show']);
 Route::post('/register/login',['as' => 'register.login','uses' => 'RegisterController@login']);
 Route::post('/register/signup',['as' => 'register.signup','uses' => 'RegisterController@signup']);
-Route::post('/postRegister',['as' => 'register.register.postRegister','uses' => 'RegisterController@postRegister']);
-Route::post('/getUserId/{id}',['as' => 'register.register.getUserId','uses' => 'RegisterController@getUserId']);
+Route::post('/register/application/postRegister',['as' => 'register.register.postRegister','uses' => 'RegisterController@postRegister']);
+Route::post('/register/application/create/',['as' => 'register.application.create','uses' => 'RegisterController@create']);
+Route::post('/register/application/getApplications/',['as' => 'register.application.get','uses' => 'RegisterController@getApplications']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
