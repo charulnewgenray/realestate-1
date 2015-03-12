@@ -942,7 +942,6 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					<!-- The form is placed inside the body of modal -->
-
 					<h4 class="modal-header">Load Previous Application</h4>
 					<div class="table-responsive">
 					<table class="table">
@@ -989,9 +988,6 @@
                     }
                 });
             });
-
-
-
             <!-- end page script -->
         });
 /* Model Actions*/
@@ -1046,8 +1042,6 @@
 							}
 						});
 			});
-
-
 });
     </script>
     @endsection

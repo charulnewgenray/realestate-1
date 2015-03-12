@@ -1,4 +1,5 @@
 /* here you can put your own css to customize and override the theme */
+.page-header.navbar .page-logo .logo-default{margin: 0;}
 .register-header{background: #333;}
 
 .register-title{margin-top: 46px;  padding: 50px 0 20px 20px;}

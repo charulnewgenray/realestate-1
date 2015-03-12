@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	@include('layouts.head')
+	@include('tenant.layouts.head')
 </head>
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square">
 
 @if(Auth::user())
-	@include('layouts.header')
+	@include('tenant.layouts.header')
 	<div class="clearfix">
 	</div>
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
-		@include('layouts.sidebar')
+		@include('tenant.layouts.sidebar')
 		<div class="page-content-wrapper">
 			<div class="page-content">
-				@include('layouts.messages')
+				@include('tenant.layouts.messages')
 				@yield('content')
 			</div>
 		</div>
@@ -23,7 +23,7 @@
 
 @include('layouts.footer')
 <!-- Scripts -->
-@include('layouts.differedscript')
+@include('tenant.layouts.differedscript')
 
 </body>
 </html>

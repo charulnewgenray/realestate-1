@@ -15,11 +15,12 @@ Route::get('/', 'WelcomeController@index');
 
 
 Route::get('/home', function(){
-
 	if(Auth::user()->hasRole('Administrator'))
 		return Redirect::to('/admin');
 	elseif(Auth::user()->hasRole('Customer'))
 		return Redirect::to('/customer');
+	elseif(Auth::user()->hasRole('Tenant'))
+		return Redirect::to('/tenant');
 	else return Redirect::to('/');
 
 });
@@ -37,6 +38,8 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+/* Administrator Routes */
+
 Route::group([
 	'middleware' => 'vault.routeNeedsRole',
 	'role' => ['Administrator'],
@@ -51,9 +54,12 @@ Route::group([
 		Route::get('/applications',['as' => 'admin.applications.index','uses' => 'Admin\ApplicationsController@index']);
 		Route::get('/search',['as' => 'admin.applications.search','uses' => 'Admin\ApplicationsController@search']);
 		Route::get('/show/{id}',['as' => 'admin.applications.show','uses' => 'Admin\ApplicationsController@show']);
+		Route::get('/work-orders',['as' => 'tenant.workorder.index','uses' => 'Tenant\WorkorderController@index']);
+		Route::get('/work-orders',['as' => 'tenant.workorder.','uses' => 'Tenant\WorkorderController@index']);
 	});
 });
 
+/* Customer Routes */
 Route::group([
 	'middleware' => 'vault.routeNeedsRole',
 	'role' => ['Customer'],
@@ -67,4 +73,23 @@ Route::group([
 
 	});
 });
+
+/* Tenant Routes */
+Route::group([
+	'middleware' => 'vault.routeNeedsRole',
+	'role' => ['Tenant'],
+	'redirect' => 'auth/login',
+	'with' => ['error', 'You do not have access to do that.']
+], function()
+{
+	Route::group(['prefix' => 'tenant'], function ()
+	{
+		Route::get('/',['as' => 'tenant.dashboard.index','uses' => 'Tenant\IndexController@index']);
+		Route::get('/',['as' => 'tenant.work-orders','uses' => 'Tenant\IndexController@getWorkOrders']);
+		Route::get('/applications',['as' => 'tenant.applications.index','uses' => 'Tenant\ApplicationsController@index']);
+		Route::get('/show/{id}',['as' => 'tenant.applications.show','uses' => 'Tenant\ApplicationsController@show']);
+		Route::get('/work-orders',['as' => 'tenant.workorders','uses' => 'Tenant\WorkorderController@index']);
+	});
+});
+
 
